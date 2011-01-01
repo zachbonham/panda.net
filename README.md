@@ -1,10 +1,17 @@
 Introduction
 =====
-Sample MSBuild script to generalize the packaging of solutions containing 'web' projects.  A web project is any project template
-that would be hosted in IIS: ASP.NET applications and WCF Service applications.
 
-The MSBuild script will take a solution file containing web projects and attempt to spit out a package folder containing
-all the results of **/t:Package** targets.
+One of the really cool things about web projects is you can produce the .zip output by using the /t:Package target.  Of course, nothing in Visual Studio allows you to 'package' a solution containing web projects, so this is my initial attempt to do it.
+
+Its components are:
+
+* **panda.lib** - code to parse the Visual Studio solution file
+* **panda.tasks** - MSBuild custom task to wrap the code
+* **test.build** - MSBuild project file to orchestrate everything
+
+A web project is any project template that would be hosted in IIS: ASP.NET applications and WCF Service applications.
+
+The MSBuild script will take a solution file containing web projects and attempt to spit out a package folder containing all the results of **/t:Package** targets.
 
 	C:\dev\panda.net>msbuild test.build /t:PackageSolution /p:Solutionfile=c:/dev/Services.sln
 	
